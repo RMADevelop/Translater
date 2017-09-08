@@ -100,7 +100,7 @@ public class Backend extends TranslateLocalContract.Contract {
             }
             cursor.close();
         } catch (Exception e) {
-
+            e.printStackTrace();
         } finally {
             db.close();
         }

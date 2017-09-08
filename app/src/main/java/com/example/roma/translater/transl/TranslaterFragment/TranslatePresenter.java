@@ -1,6 +1,8 @@
 package com.example.roma.translater.transl.TranslaterFragment;
 
 
+import android.util.Log;
+
 import com.example.roma.translater.data.TranslateItem;
 import com.example.roma.translater.data.source.TranslateDataSource.TranslateLoaded;
 import com.example.roma.translater.data.source.TranslateRepository;
@@ -44,11 +46,14 @@ public class TranslatePresenter implements TranslateContract.Presenter {
 
     @Override
     public void searchTranslate(final String wordIn) {
+        Log.v("gfskdfbg", "search begin");
         switchViewsState(false);
+
         if (wordIn.length() == 0) {
             translateView.hideProgress();
             return;
         }
+
         translateView.showClearButton();
         translateView.setWordIn(wordIn);
 
@@ -58,16 +63,20 @@ public class TranslatePresenter implements TranslateContract.Presenter {
             translateView.setWordOut(itemFromLocal.getWordOut());
             return;
         }
+        Log.v("gfskdfbg", "after local search");
 
-        repository.searchFroomServer(wordIn, lang_ru_en ? "en-ru" : "ru_en", new TranslateLoaded() {
+        repository.searchFroomServer(wordIn, lang_ru_en ? "en-ru" : "ru-en", new TranslateLoaded() {
             @Override
             public void complete(String word) {
                 TranslateItem item = new TranslateItem(wordIn, word, lang_ru_en ? "en-ru" : "ru-en");
+                Log.v("gfskdfbg", "item");
+
                 switchViewsState(true);
                 translateView.setWordOut(word);
                 repository.saveItem(item);
             }
         });
+
     }
 
     private void switchViewsState(boolean stateShow) {

@@ -73,7 +73,7 @@ public class TranslateRemoteDataSource implements TranslateDataSource {
     }
 
     @Override
-    public String searchFroomServer(final String word,String lang, final TranslateDataSource.TranslateLoaded callback) {
+    public String searchFroomServer(final String word, String lang, final TranslateDataSource.TranslateLoaded callback) {
         final String[] translate = new String[1];
         OkHttpClient.Builder okhttp = new OkHttpClient.Builder();
         Retrofit retrofit = new Retrofit.Builder()
@@ -95,7 +95,7 @@ public class TranslateRemoteDataSource implements TranslateDataSource {
 
             @Override
             public void onFailure(Call<Translate> call, Throwable t) {
-
+                t.printStackTrace();
             }
 
         });

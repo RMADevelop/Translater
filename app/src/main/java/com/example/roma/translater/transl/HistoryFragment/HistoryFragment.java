@@ -29,6 +29,7 @@ import com.example.roma.translater.data.TranslateItem;
 import com.example.roma.translater.data.source.TranslateRepository;
 import com.example.roma.translater.data.source.local.TranslateLocalDataSource;
 import com.example.roma.translater.data.source.remote.TranslateRemoteDataSource;
+import com.example.roma.translater.util.AppExecutors;
 
 import java.util.Collections;
 import java.util.List;
@@ -84,7 +85,7 @@ public class HistoryFragment extends Fragment implements HistoryFragmentContract
         View view = inflater.inflate(R.layout.fragment_history_recycler, container, false);
         presenter = new HistoryFragmentPresenter(this,
                 TranslateRepository.getRepository(
-                        TranslateLocalDataSource.getInstance(getContext()),
+                        TranslateLocalDataSource.getInstance(getContext(), new AppExecutors()),
                         TranslateRemoteDataSource.getInstance(getContext())));
 
         adapter = new AdapterRecycler(itemListener, Collections.<TranslateItem>emptyList(), getContext());

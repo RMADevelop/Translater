@@ -24,6 +24,7 @@ import com.example.roma.translater.data.TranslateItem;
 import com.example.roma.translater.data.source.TranslateRepository;
 import com.example.roma.translater.data.source.local.TranslateLocalDataSource;
 import com.example.roma.translater.data.source.remote.TranslateRemoteDataSource;
+import com.example.roma.translater.util.AppExecutors;
 
 import java.util.Collections;
 import java.util.List;
@@ -102,7 +103,7 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.View 
                 TranslateRepository
                         .getRepository(
                                 TranslateLocalDataSource
-                                        .getInstance(getContext()),
+                                        .getInstance(getContext(), new AppExecutors()),
                                 TranslateRemoteDataSource
                                         .getInstance(getContext())),
                 this);
